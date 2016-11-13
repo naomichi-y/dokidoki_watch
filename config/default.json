@@ -20,6 +20,7 @@
         "callback_url": ""
     },
     "line": {
-        "channel_access_token": ""
+        "channel_access_token": "",
+        "id": ""
     }
 }
