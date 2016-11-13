@@ -1,0 +1,51 @@
+{
+  "name": "dokidoki_watch",
+  "version": "1.1.0",
+  "description": "Measure heart rate and give alert notification.",
+  "main": "bin/lambda.js",
+  "scripts": {
+    "config": "node bin/configure.js",
+    "local": "gulp local",
+    "local-heartrate": "gulp local-heartrate",
+    "invoke-lambda": "gulp invoke-lambda",
+    "create-bucket": "gulp create-bucket",
+    "delete-bucket": "gulp delete-bucket",
+    "upload-api-gateway-swagger": "gulp upload-api-gateway-swagger",
+    "create-stack": "gulp create-stack",
+    "update-stack": "gulp update-stack",
+    "delete-stack": "gulp delete-stack",
+    "package-function": "gulp package-function",
+    "upload-function": "gulp upload-function",
+    "update-function": "gulp update-function",
+    "package-upload-function": "gulp package-upload-function",
+    "upload-update-function": "gulp upload-update-function",
+    "package-upload-update-function": "gulp package-upload-update-function",
+    "setup": "gulp setup",
+    "watch": "gulp watch",
+    "sequelize": "sequelize"
+  },
+  "dependencies": {
+    "aws-serverless-express": "^1.1.0",
+    "body-parser": "^1.15.2",
+    "config": "^1.24.0",
+    "cors": "^2.8.1",
+    "ect": "^0.5.9",
+    "express": "^4.14.0",
+    "fitbit-node": "^2.0.3",
+    "https": "^1.0.0",
+    "i18n": "^0.8.3",
+    "json-beautify": "^1.0.1",
+    "lodash": "^4.16.6",
+    "moment-timezone": "^0.5.9",
+    "mysql": "^2.12.0",
+    "sequelize": "^3.24.8",
+    "sequelize-cli": "^2.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.2",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "minimist": "^1.2.0"
+  }
+}

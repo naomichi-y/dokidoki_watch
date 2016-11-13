@@ -1,0 +1,25 @@
+{
+    "setup": {
+        "bucket_name": "YOUR_UNIQUE_BUCKET_NAME",
+        "cloud_formation_stack_name": "DokiDokiWatchStack",
+        "region": "YOUR_AWS_REGION"
+    },
+    "heartrate": {
+        "threshold": {
+            "upper_limit": 120
+        },
+        "monitoring": {
+            "minutes_begin_ago": 24,
+            "minutes_end_ago": 10
+        }
+    },
+    "fitbit": {
+        "client_id": "",
+        "client_secret": "",
+        "scope": "profile heartrate",
+        "callback_url": ""
+    },
+    "line": {
+        "channel_access_token": ""
+    }
+}

@@ -1,0 +1,39 @@
+version: "2"
+services:
+  data:
+    container_name: "dokidoki_watch-data"
+    build: "./docker/data"
+    volumes:
+      - "./:/data"
+
+  app:
+    container_name: "dokidoki_watch-app"
+    build: "./docker/app"
+    volumes_from:
+      - "data"
+    ports:
+      - "3000:3000"
+    networks:
+      dokidoki_watch-net:
+        ipv4_address: "172.16.238.2"
+
+  db:
+    container_name: "dokidoki_watch-db"
+    build: "./docker/db"
+    volumes:
+      - "/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    env_file: "./docker/.env"
+    networks:
+      dokidoki_watch-net:
+        ipv4_address: "172.16.238.3"
+
+networks:
+  dokidoki_watch-net:
+    driver: "bridge"
+    ipam:
+      driver: "default"
+      config:
+      - subnet: "172.16.238.0/24"
+        gateway: "172.16.238.1"

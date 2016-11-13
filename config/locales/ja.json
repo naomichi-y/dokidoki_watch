@@ -1,0 +1,5 @@
+{
+    "messages": {
+        "thresholdOver": "脈拍の平均が%sこえてるよ。落ち着いて〜 (現在のBPM: %s)"
+    }
+}

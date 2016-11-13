@@ -1,0 +1,8 @@
+/config/database.json
+/config/development.json
+/config/production.json
+/config/cloudformation/simple-proxy-api.yaml
+/node_modules
+/tmp
+npm-debug.log
+.DS_Store
