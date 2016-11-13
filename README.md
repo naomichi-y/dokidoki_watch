@@ -41,6 +41,9 @@ npm run watch
 ```
 
 Open the [http://localhost:3000/](http://localhost:3000/) in your browser.
+In API console, you can try the Fitbit API.
+
+<img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/api_console.png" width="600px">
 
 ## Deploy to AWS
 
