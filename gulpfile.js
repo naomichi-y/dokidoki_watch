@@ -6,7 +6,6 @@ let stylish = require('jshint-stylish')
 let execSpawn = require('child_process').spawn
 let execSync = require('child_process').execSync
 let config = require('config')
-var minimist = require("minimist")
 
 let server
 let watchScripts = [

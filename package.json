@@ -45,7 +45,6 @@
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.2",
     "jshint": "^2.9.4",
-    "jshint-stylish": "^2.2.1",
-    "minimist": "^1.2.0"
+    "jshint-stylish": "^2.2.1"
   }
 }
