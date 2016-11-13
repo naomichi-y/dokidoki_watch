@@ -2,7 +2,13 @@
 
 This application is a heart rate measurement tool using [Fitbit](https://www.fitbit.com/).
 If the threshold is exceeded, the application will notify the LINE talk room.
+
+<img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/line_notify.png" width="300px">
+
+## Architecture
 Applications are configured in a serverless architecture and work on AWS Lambda.
+
+<img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/architecture.png" width="600px">
 
 ## Required tools
 
@@ -37,6 +43,9 @@ npm run watch
 ```
 
 Open the [http://localhost:3000/](http://localhost:3000/) in your browser.
+In API console, you can try the Fitbit API.
+
+<img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/api_console.png" width="600px">
 
 ## Deploy to AWS
 
