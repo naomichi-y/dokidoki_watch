@@ -3,6 +3,8 @@
 This application is a heart rate measurement tool using [Fitbit](https://www.fitbit.com/).
 If the threshold is exceeded, the application will notify the LINE talk room.
 
+<img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/line_notify.png" width="300px">
+
 ## Architecture
 Applications are configured in a serverless architecture and work on AWS Lambda.
 
