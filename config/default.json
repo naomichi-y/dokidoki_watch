@@ -9,8 +9,8 @@
             "upper_limit": 120
         },
         "monitoring": {
-            "minutes_begin_ago": 24,
-            "minutes_end_ago": 10
+            "minutes_range": 10,
+            "minutes_ago": 5
         }
     },
     "fitbit": {
