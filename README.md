@@ -21,14 +21,16 @@ The development environment can be built with Docker.
 ## Docker components
 Docker consists of the following containers.
 
-* dokidoki_watch-app
+* `dokidoki_watch-app` container
+  * Alpine base
   * NodeJS v4.3.2
     * [aws-serverless-express](https://github.com/awslabs/aws-serverless-express)
 
-* dokidoki_watch-db
+* `dokidoki_watch-db` container
   * MySQL v5.7
 
-* dokidoki_watch-data
+* `dokidoki_watch-data` container
+  * Alpine base
   * Persistent data container for application
 
 ## Local setup
