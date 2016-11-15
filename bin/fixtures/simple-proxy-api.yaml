@@ -1,7 +1,7 @@
 ---
 swagger: 2.0
 info:
-  title: AwsServerlessExpressApi
+  title: DokiDokiWatchApi
 basePath: /prod
 schemes:
 - https
@@ -19,7 +19,7 @@ paths:
         responses:
           default:
             statusCode: 200
-        uri: arn:aws:apigateway:YOUR_AWS_REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:YOUR_AWS_REGION:YOUR_ACCOUNT_ID:function:AwsServerlessExpressFunction/invocations
+        uri: arn:aws:apigateway:YOUR_AWS_REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:YOUR_AWS_REGION:YOUR_ACCOUNT_ID:function:DokiDokiWatchApiReceiver/invocations
         passthroughBehavior: when_no_match
         httpMethod: POST
         type: aws_proxy
@@ -63,7 +63,7 @@ paths:
         type: string
       responses: {}
       x-amazon-apigateway-integration:
-        uri: arn:aws:apigateway:YOUR_AWS_REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:YOUR_AWS_REGION:YOUR_ACCOUNT_ID:function:AwsServerlessExpressFunction/invocations
+        uri: arn:aws:apigateway:YOUR_AWS_REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:YOUR_AWS_REGION:YOUR_ACCOUNT_ID:function:DokiDokiWatchApiReceiver/invocations
         httpMethod: POST
         type: aws_proxy
     options:

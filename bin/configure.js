@@ -25,7 +25,7 @@ if (availableRegions.indexOf(region) === -1) {
 }
 
 modifySimpleProxyFile()
-ceateEnvConfigFile()
+createEnvConfigFile()
 
 function modifySimpleProxyFile() {
     const simpleProxyApiTemplatePath = './bin/fixtures/simple-proxy-api.yaml'

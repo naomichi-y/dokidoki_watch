@@ -36,12 +36,12 @@ Docker consists of the following containers.
 ## Local setup
 
 ```
-docker-compose build
-docker-compose up
-npm run sequelize db:migrate
+$ docker-compose build
+$ docker-compose up
+$ npm run sequelize db:migrate
 
 # Starting Express
-npm run watch
+$ npm run watch
 ```
 
 Open the [http://localhost:3000/](http://localhost:3000/) in your browser.
@@ -57,17 +57,34 @@ Deploy flow is same as aws-serverless-express.
 Creating stack on AWS CloudFormation.
 
 ```
-npm run config <accountId> <bucketName> [region]
-npm run setup
+$ mysql -u {USER} -p -h {HOST} -e "CREATE DATABASE {DATABASE}"
+$ npm run sequelize -- --env production db:migrate
+
+$ npm run config <accountId> <bucketName> [region]
+$ npm run setup
 ```
+
+Unfortunately, CloudFormation does not support scheduled Lambda events.
+Trigger must be set manually.
+
+1. Open `DokiDokiWatchHeartrateChecker` function on the Lambda console.
+2. Open the `Triggers` tab.
+3. Open the `Triggers` tab and click `Add triger`.
+4. Set trigger properties.
+  * Trigger type: CloudWatch Events - Schedule
+  * Schedule expression: rate(5 minutes)
+  * Enable trigger: Check
+
+This completes the setting.
+After that, data is saved in RDS at the timing when Fitbit synchronizes.
 
 ### Updating Lambda function
 ```
-npm run package-upload-update-function
+$ npm run package-upload-update-function
 ```
 
 ### Deleting stack on CloudFormation
 
 ```
-npm run delete-stack
+$ npm run delete-stack
 ```
