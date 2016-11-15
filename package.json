@@ -5,9 +5,10 @@
   "main": "bin/lambda-receiver.js",
   "scripts": {
     "config": "node bin/configure.js",
-    "local": "gulp local",
+    "local-api-receiver": "gulp local-api-receiver",
     "local-heartrate-checker": "gulp local-heartrate-checker",
-    "invoke-lambda": "gulp invoke-lambda",
+    "invoke-lambda-api-receiver": "gulp invoke-lambda-api-receiver",
+    "invoke-lambda-heartrate-checker": "gulp invoke-lambda-heartrate-checker",
     "create-bucket": "gulp create-bucket",
     "delete-bucket": "gulp delete-bucket",
     "upload-api-gateway-swagger": "gulp upload-api-gateway-swagger",

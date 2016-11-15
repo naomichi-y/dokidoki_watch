@@ -17,8 +17,9 @@ let watchScripts = [
 ]
 
 let lambdaContext = {
+    // Using by aws-serverless-express package
     succeed: v => {
-        logger.info(v)
+        logger.info(JSON.stringify(v))
         process.exit(0)
     }
 }
@@ -37,7 +38,7 @@ let lambdaCallback = (err, result) => {
     process.exit(status)
 }
 
-gulp.task('set-dev-env', function() {
+gulp.task('set-environment', function() {
     process.env.EXPRESS_MODE = 'listen';
     process.env.NODE_ENV = 'development'
 });
@@ -48,7 +49,7 @@ gulp.task('lint', () => {
         .pipe(jshint.reporter(stylish))
 });
 
-gulp.task('server', ['set-dev-env'], () => {
+gulp.task('server', ['set-environment'], () => {
     if (server) {
          server.kill('SIGKILL')
     }
@@ -65,11 +66,11 @@ gulp.task('server', ['set-dev-env'], () => {
     })
 })
 
-gulp.task('watch', ['set-dev-env', 'lint', 'server'], () => {
+gulp.task('watch', ['set-environment', 'lint', 'server'], () => {
     gulp.watch(watchScripts, ['lint', 'server'])
 })
 
-gulp.task('local', () => {
+gulp.task('local-api-receiver', () => {
     require('./bin/lambda-api-receiver.js').handler(
         require('./bin/fixtures/api-gateway-event.json'),
         lambdaContext,
@@ -85,8 +86,12 @@ gulp.task('local-heartrate-checker', () => {
     )
 })
 
-gulp.task('invoke-lambda', () => {
+gulp.task('invoke-lambda-api-receiver', () => {
     logger.info(execSync(`aws lambda invoke --function-name DokiDokiWatchApiReceiver --region ${config.setup.region} --payload file://bin/fixtures/api-gateway-event.json tmp/lambda-invoke-response.json && cat tmp/lambda-invoke-response.json`).toString())
+})
+
+gulp.task('invoke-lambda-heartrate-checker', () => {
+    logger.info(execSync(`aws lambda invoke --function-name DokiDokiWatchHeartrateChecker --region ${config.setup.region} tmp/lambda-invoke-response.json && cat tmp/lambda-invoke-response.json`).toString())
 })
 
 gulp.task('create-bucket', () => {
