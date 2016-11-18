@@ -6,7 +6,7 @@
     },
     "heartrate": {
         "threshold": {
-            "upper_limit": 120
+            "upper_limit": 110
         },
         "monitoring": {
             "minutes_range": 10,
