@@ -11,6 +11,6 @@ exports.handler = (event, context, callback) => {
     worker.run().then(() => {
         callback(null, 'Check is completed.')
     }).catch (err => {
-        callback(err)
+        callback(JSON.stringify(err, null, '  '))
     })
 }

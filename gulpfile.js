@@ -19,7 +19,7 @@ let watchScripts = [
 let lambdaContext = {
     // Using by aws-serverless-express package
     succeed: v => {
-        logger.info(JSON.stringify(v))
+        logger.info(JSON.stringify(v, null, '  '))
         process.exit(0)
     }
 }
