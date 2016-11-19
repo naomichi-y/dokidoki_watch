@@ -46,10 +46,7 @@
                 "RestApiId": {
                     "Ref": "ApiGatewayApi"
                 },
-                "StageName": "prod",
-                "Variables": {
-                    "NODE_ENV": "production"
-                }
+                "StageName": "prod"
             }
         },
 
@@ -132,7 +129,12 @@
                     "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
                 },
                 "Runtime": "nodejs4.3",
-                "Timeout": 20
+                "Timeout": 30,
+                "Environment": {
+                    "Variables": {
+                        "NODE_ENV": "production"
+                    }
+                }
             }
         },
 
@@ -154,7 +156,12 @@
                     "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
                 },
                 "Runtime": "nodejs4.3",
-                "Timeout": 20
+                "Timeout": 30,
+                "Environment": {
+                    "Variables": {
+                        "NODE_ENV": "production"
+                    }
+                }
             }
         }
     },

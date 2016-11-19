@@ -4,7 +4,10 @@ let logger = require('../lib/logger')
 
 exports.handler = (event, context, callback) => {
     logger.info('Processing started.')
-    process.env.NODE_ENV = context.invokedFunctionArn ? 'production' : 'development'
+
+    if (!process.env.NODE_ENV) {
+        process.env.NODE_ENV = 'development'
+    }
 
     let worker = require('../lib/tasks/heartrate_worker')
 
