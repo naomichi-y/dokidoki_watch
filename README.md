@@ -29,10 +29,6 @@ Docker consists of the following containers.
 * `dokidoki_watch-db` container
   * MySQL v5.7
 
-* `dokidoki_watch-data` container
-  * Alpine base
-  * Persistent data container for application
-
 ## Local setup
 
 ```

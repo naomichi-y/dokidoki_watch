@@ -1,16 +1,10 @@
 version: "2"
 services:
-  data:
-    container_name: "dokidoki_watch-data"
-    build: "./docker/data"
-    volumes:
-      - "./:/data"
-
   app:
     container_name: "dokidoki_watch-app"
     build: "./docker/app"
-    volumes_from:
-      - "data"
+    volumes:
+      - "./:/data"
     ports:
       - "3000:3000"
     networks:
