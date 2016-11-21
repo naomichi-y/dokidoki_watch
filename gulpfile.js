@@ -38,8 +38,8 @@ let lambdaCallback = (err, result) => {
     process.exit(status)
 }
 
-gulp.task('set-environment', function() {
-    process.env.EXPRESS_MODE = 'listen';
+gulp.task('environment', function() {
+    process.env.LAUNCH_MODE = 'listen';
     process.env.NODE_ENV = 'development'
 });
 
@@ -49,7 +49,7 @@ gulp.task('lint', () => {
         .pipe(jshint.reporter(stylish))
 });
 
-gulp.task('server', ['set-environment'], () => {
+gulp.task('server', ['environment'], () => {
     if (server) {
          server.kill('SIGKILL')
     }
@@ -66,11 +66,11 @@ gulp.task('server', ['set-environment'], () => {
     })
 })
 
-gulp.task('watch', ['set-environment', 'lint', 'server'], () => {
+gulp.task('watch', ['environment', 'lint', 'server'], () => {
     gulp.watch(watchScripts, ['lint', 'server'])
 })
 
-gulp.task('local-api-receiver', () => {
+gulp.task('local-api-receiver', ['lint'], () => {
     require('./bin/lambda-api-receiver.js').handler(
         require('./bin/fixtures/api-gateway-event.json'),
         lambdaContext,
@@ -78,7 +78,7 @@ gulp.task('local-api-receiver', () => {
     )
 })
 
-gulp.task('local-heartrate-checker', () => {
+gulp.task('local-heartrate-checker', ['lint'], () => {
     require('./bin/lambda-heartrate-checker.js').handler(
         {},
         lambdaContext,

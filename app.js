@@ -21,7 +21,7 @@ app.use('/api', routes.api)
 app.use('/users', routes.users)
 app.use('/receiver', routes.receiver)
 
-if (process.env.EXPRESS_MODE === 'listen') {
+if (process.env.LAUNCH_MODE === 'listen') {
     app.listen(3000)
 }
 

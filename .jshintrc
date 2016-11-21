@@ -1,5 +1,8 @@
 {
     "esnext": true,
     "asi": true,
-    "node": true
+    "node": true,
+    "globals": {
+        "Promise": true
+    }
 }

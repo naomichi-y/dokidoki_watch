@@ -7,21 +7,21 @@ const config = require('config')
 const FitbitApiClient = require('fitbit-node')
 const beautify = require('json-beautify')
 const models = require('../lib/models')
-const fitbitHelper = require('../lib/fitbit-helper')
+const fitbit = require('../lib/fitbit')
 
 router.get('/:username?', (req, res) => {
     if (req.params.username) {
-        let fitbit = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
+        let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
 
         models.User.find({where: {username: req.params.username}}).then(user => {
             if (user) {
                 let endpoint = req.query.endpoint
 
                 if (!endpoint) {
-                    endpoint = fitbitHelper.heartrateEndpoint(user.timezone)
+                    endpoint = fitbit.heartrateEndpoint(user.timezone)
                 }
 
-                fitbit.get(endpoint, user.access_token).then(results => {
+                fitbitApiClient.get(endpoint, user.access_token).then(results => {
                     if (results[1].statusCode !== 200) {
                         res.json(results[1])
 
