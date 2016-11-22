@@ -1,8 +1,8 @@
 'use strict'
 
+const Promise = require('bluebird')
 const express = require('express')
-const app = express()
-const router = express.Router()
+const router = require('express-promise-router')()
 const config = require('config')
 const FitbitApiClient = require('fitbit-node')
 

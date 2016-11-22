@@ -1,45 +1,62 @@
 'use strict'
 
-const express = require('express')
-const app = express()
-const router = express.Router()
+const Promise = require('bluebird')
+const router = require('express-promise-router')()
 const config = require('config')
 const FitbitApiClient = require('fitbit-node')
 const beautify = require('json-beautify')
 const models = require('../lib/models')
 const fitbit = require('../lib/fitbit')
 
+let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
+
+function findUser(username) {
+    return new Promise((resolve, reject) => {
+        models.User.find({where: {username: username}}).then(user => {
+            resolve(user)
+        }).catch(err => {
+            reject(err)
+        })
+    })
+}
+
+function findData(endpoint, user) {
+    return new Promise((resolve, reject) => {
+        fitbitApiClient.get(endpoint, user.access_token).then(results => {
+            if (results[1].statusCode === 200) {
+                resolve([endpoint, results])
+
+            } else {
+                let error = results[0].errors[0]
+                reject(new Error(`${error.errorType} (${error.message})`))
+            }
+        })
+   })
+}
+
 router.get('/:username?', (req, res) => {
     if (req.params.username) {
-        let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
+        return Promise.try(() => {
+                return findUser(req.params.username)
 
-        models.User.find({where: {username: req.params.username}}).then(user => {
-            if (user) {
-                let endpoint = req.query.endpoint
+        }).then((user) => {
+            let endpoint = req.query.endpoint
 
-                if (!endpoint) {
-                    endpoint = fitbit.heartrateEndpoint(user.timezone)
-                }
-
-                fitbitApiClient.get(endpoint, user.access_token).then(results => {
-                    if (results[1].statusCode !== 200) {
-                        res.json(results[1])
-
-                    } else {
-                        res.render('api/index', {
-                            data: beautify(results, null, 2),
-                            endpoint: endpoint
-                        })
-                    }
-                }).catch(err => {
-                    res.json(err)
-                })
-            } else {
-                res.json({message: 'User does not exist.' })
+            if (!endpoint) {
+                endpoint = fitbit.heartrateEndpoint(user.timezone)
             }
 
-        }).catch(err => {
-            res.json(err)
+            if (user) {
+                return findData(endpoint, user)
+            } else {
+                throw new Error('User does not exist.')
+            }
+
+        }).then(results => {
+            res.render('api/index', {
+                data: beautify(results[1], null, 2),
+                endpoint: results[0]
+            })
         })
 
     } else {

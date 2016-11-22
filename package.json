@@ -34,6 +34,8 @@
     "eazy-logger": "^3.0.2",
     "ect": "^0.5.9",
     "express": "^4.14.0",
+    "express-no-favicons": "0.0.1",
+    "express-promise-router": "^1.1.1",
     "fitbit-node": "^2.0.3",
     "https": "^1.0.0",
     "i18n": "^0.8.3",
