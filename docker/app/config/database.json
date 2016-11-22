@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "root",
+    "password": "dokidoki",
+    "database": "dokidoki_watch_develop",
+    "host": "172.16.238.3",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "dokidoki",
+    "database": "dokidoki_watch",
+    "host": "172.16.238.3",
+    "dialect": "mysql"
+  }
+}

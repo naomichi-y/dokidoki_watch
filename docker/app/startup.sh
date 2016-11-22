@@ -3,7 +3,7 @@
 cd /data
 
 if [ ! -f config/database.json ]; then
-  cp config/database.json.example config/database.json
+  cp docker/app/config/database.json config/database.json
 fi
 
 npm install
