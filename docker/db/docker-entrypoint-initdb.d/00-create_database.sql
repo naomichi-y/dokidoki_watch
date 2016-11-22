@@ -1,1 +1,1 @@
-CREATE DATABASE dokidoki_watch;
+CREATE DATABASE dokidoki_watch_develop;

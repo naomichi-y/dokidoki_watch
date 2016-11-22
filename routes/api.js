@@ -40,13 +40,13 @@ router.get('/:username?', (req, res) => {
                 return findUser(req.params.username)
 
         }).then((user) => {
-            let endpoint = req.query.endpoint
-
-            if (!endpoint) {
-                endpoint = fitbit.heartrateEndpoint(user.timezone)
-            }
-
             if (user) {
+                let endpoint = req.query.endpoint
+
+                if (!endpoint) {
+                    endpoint = fitbit.heartrateEndpoint(user.timezone)
+                }
+
                 return findData(endpoint, user)
             } else {
                 throw new Error('User does not exist.')

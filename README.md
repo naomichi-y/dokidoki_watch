@@ -29,15 +29,20 @@ Docker consists of the following containers.
 * `dokidoki_watch-db` container
   * MySQL v5.7
 
-## Local setup
+## Setup
+
+### Create Fitbit application
+Please open [dev.fitbit.com](https://dev.fitbit.com/) and create a new application.
+`OAuth 2.0 Application Type` must be set to `Personal`.
+
+### Create development environment
 
 ```
 $ docker-compose build
 $ docker-compose up
-$ npm run sequelize db:migrate
 
-# Starting Express
-$ npm run watch
+# For application settings, please edit `config/default.json` (or `development.json`, `production.json`).
+$ npm run sequelize db:migrate
 ```
 
 Open the [http://localhost:3000/](http://localhost:3000/) in your browser.
@@ -45,12 +50,18 @@ In API console, you can try the Fitbit API.
 
 <img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/api_console.png" width="600px">
 
+If you want to start Express without going through Docker, please execute the following command.
+
+```
+$ npm run watch
+```
+
 ## Deploy to AWS
 
-Deploy flow is same as aws-serverless-express.
+Deploy flow is same as `aws-serverless-express` package.
 
-### Setup
-Creating stack on AWS CloudFormation.
+### Initial setup
+Create a stack with CloudFormation.
 
 ```
 $ mysql -u {USER} -p -h {HOST} -e "CREATE DATABASE {DATABASE}"
@@ -60,10 +71,11 @@ $ npm run config <accountId> <bucketName> [region]
 $ npm run setup
 ```
 
+#### Lambda trigger settings
 Unfortunately, CloudFormation does not support scheduled Lambda events.
 Trigger must be set manually.
 
-1. Open `DokiDokiWatchHeartrateChecker` function on the Lambda console.
+1. Open `DokiDokiWatchHeartrateChecker` function on Lambda console.
 2. Open the `Triggers` tab.
 3. Open the `Triggers` tab and click `Add triger`.
 4. Set trigger properties.
@@ -72,14 +84,23 @@ Trigger must be set manually.
   * Enable trigger: Check
 
 This completes the setting.
-After that, data is saved in RDS at the timing when Fitbit synchronizes.
 
-### Updating Lambda function
+#### Lambda VPC settings
+Also, in order to connect to MySQL from Lambda, we strongly recommend VPC setting of Lambda function (VPC setting is not done in above setup)
+
+#### Create database
+You need to create a database first. Please match name specified in `config/database.json`.
+
+### Test drive
+
+Please synchronize Fitbit. If application is set up correctly, you can check the execution result on CloudWatch Logs.
+
+## Updating Lambda function
 ```
 $ npm run package-upload-update-function
 ```
 
-### Deleting stack on CloudFormation
+## Deleting stack on CloudFormation
 
 ```
 $ npm run delete-stack
