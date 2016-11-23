@@ -1,4 +1,5 @@
 module.exports = {
+  "env": "development",
   "config": "./config/database.json",
   "migrationsPath": "./db/migrations",
   "modelsPath": "./lib/models",
