@@ -76,7 +76,7 @@ gulp.task('watch', ['env-development', 'lint', 'server'], () => {
 
 gulp.task('local-api-receiver', ['env-localhost', 'lint'], () => {
     require('./bin/lambda-api-receiver.js').handler(
-        require('./bin/fixtures/api-gateway-event.json'),
+        require('./config/api-gateway/api-receiver-event.json'),
         lambdaContext,
         lambdaCallback
     )

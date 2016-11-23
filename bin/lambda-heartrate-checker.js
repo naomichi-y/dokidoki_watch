@@ -1,18 +1,14 @@
 'use strict'
 
+const Promise = require('bluebird')
 const logger = require('../lib/logger')
 const worker = require('../lib/tasks/heartrate_worker')
-const Promise = require('bluebird')
 
 exports.handler = (event, context, callback) => {
     logger.info('Processing started.')
 
     Promise.onPossiblyUnhandledRejection(err => {
-        if (err.stack) {
-            callback(err.stack)
-        } else {
-            callback(err)
-        }
+        callback(err.stack)
     });
 
     if (!process.env.NODE_ENV) {

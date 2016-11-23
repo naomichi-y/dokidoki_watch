@@ -37,13 +37,13 @@
         <div class="top-bar">
             <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
-                    <li class="menu-text"><a href="/">dokidoki watch</a></li>
+                    <li class="menu-text"><a href="/"><%- @i18n.__('common.app_name') %></a></li>
                 </ul>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <h1>Fitbit API Console</h1>
+                <h1><%- @i18n.__('pages.index.title') %></h1>
                 <% if @endpoint?: %>
                     <form>
                         <div class="input-group">
@@ -58,11 +58,11 @@
                 <% else: %>
                     <ol>
                         <li>
-                            <p>Create user and get <code>user_id</code> of Fitbit.</p>
+                            <p><%- @i18n.__('pages.index.setup_flow1') %></p>
                             <p><pre><code class="markdown"><a href="<%- @baseUrl %>users/new"><%- @baseUrl %>users/new</a></code></pre></p>
                         </li>
                         <li>
-                            <p>Open the following URL. By default, <code>user_id</code> is set for <code>users#username</code>.</p>
+                            <p><%- @i18n.__('pages.index.setup_flow2') %></p>
                             <p><pre><code class="markdown"><%- @baseUrl %>api/{users#username}</code></pre></p>
                         </li>
                     </ol>

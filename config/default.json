@@ -8,7 +8,7 @@
         "threshold": {
             "upper_limit": 110
         },
-        "monitoring": {
+        "monitor": {
             "minutes_range": 10,
             "minutes_ago": 5
         }

@@ -1,5 +1,15 @@
 {
+    "common": {
+        "app_name": "dokidoki watch"
+    },
     "messages": {
-        "thresholdOver": "脈拍の平均が%sこえてるよ。落ち着いて〜 (現在のBPM: %s)"
+        "threshold_over": "心拍数が%sこえてるよ。落ち着いて〜 (直近の平均BPM: %s)"
+    },
+    "pages": {
+        "index": {
+            "title": "Fitbit API Console",
+            "setup_flow1": "Create user and get <code>user_id</code> of Fitbit.",
+            "setup_flow2": "Open the following URL. By default, <code>user_id</code> is set for <code>users#username</code>."
+        }
     }
 }

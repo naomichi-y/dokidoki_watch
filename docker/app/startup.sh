@@ -7,4 +7,4 @@ if [ ! -f config/database.json ]; then
 fi
 
 npm install
-gulp watch
+npm run watch

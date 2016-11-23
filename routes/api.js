@@ -6,7 +6,8 @@ const config = require('config')
 const FitbitApiClient = require('fitbit-node')
 const beautify = require('json-beautify')
 const models = require('../lib/models')
-const fitbit = require('../lib/fitbit')
+const fitbitApiHelper = require('../lib/fitbit-api-helper')
+const i18n = require('../lib/i18n').configure()
 
 let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
 
@@ -44,7 +45,7 @@ router.get('/:username?', (req, res) => {
                 let endpoint = req.query.endpoint
 
                 if (!endpoint) {
-                    endpoint = fitbit.heartrateEndpoint(user.timezone)
+                    endpoint = fitbitApiHelper.heartrateEndpoint(user.timezone)
                 }
 
                 return findData(endpoint, user)
@@ -54,6 +55,7 @@ router.get('/:username?', (req, res) => {
 
         }).then(results => {
             res.render('api/index', {
+                i18n: i18n,
                 data: beautify(results[1], null, 2),
                 endpoint: results[0]
             })
@@ -63,7 +65,8 @@ router.get('/:username?', (req, res) => {
         let baseUrl = `${req.protocol}://${req.header('host')}/`
 
         res.render('api/index', {
-            baseUrl: baseUrl
+            i18n: i18n,
+            baseUrl: baseUrl,
         })
     }
 })
