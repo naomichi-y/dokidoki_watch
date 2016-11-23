@@ -1,4 +1,11 @@
 {
+  "localhost": {
+    "username": "root",
+    "password": "dokidoki",
+    "database": "dokidoki_watch_develop",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
   "development": {
     "username": "root",
     "password": "dokidoki",

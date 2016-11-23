@@ -1,5 +1,5 @@
 module.exports = {
-  "env": "development",
+  "env": "localhost",
   "config": "./config/database.json",
   "migrationsPath": "./db/migrations",
   "modelsPath": "./lib/models",
