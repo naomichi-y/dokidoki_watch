@@ -11,7 +11,7 @@ let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit
 
 let controller = {
     callback: (req, res, next) => {
-        return Promise.try(() => {
+        Promise.try(() => {
             fitbitApiClient.getAccessToken(req.query.code, config.fitbit.callback_url).then(results => {
                 return results
 
@@ -20,13 +20,14 @@ let controller = {
                     if (user) {
                         models.User.updateToken(user.id, results.access_token, results.refresh_token).then(() => {
                             next(new Error(`User is registered (user_id: ${user.fitbit_id})`))
-                        }).catch(err => {
-                            next(err)
                         })
 
                     } else {
                         fitbitApiClient.get('/profile.json', results.access_token).then(profile => {
-                            user = models.User.build({
+                            return profile
+
+                        }).then(profile => {
+                            return models.User.build({
                                 username: results.user_id,
                                 fitbit_id: results.user_id,
                                 timezone: profile[0].user.timezone,
@@ -34,12 +35,9 @@ let controller = {
                                 refresh_token: results.refresh_token
                             })
                             .save()
-                            .then(results => {
-                                res.json(results)
 
-                            }).catch(err => {
-                                next(err)
-                            })
+                        }).then(results => {
+                            res.json(results)
 
                         }).catch(err => {
                             next(err)

@@ -7,10 +7,13 @@ const beautify = require('json-beautify')
 const models = require('../lib/models')
 const fitbitApiHelper = require('../lib/fitbit-api-helper')
 
+let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
 let controller = {
     index: (req, res, next) => {
         if (req.params.username) {
             Promise.try(() => {
+                let endpoint
+
                 models.User.find({where: {username: req.params.username}}).then(user => {
                     if (user) {
                         let endpoint = req.query.endpoint
@@ -26,31 +29,25 @@ let controller = {
                     }
 
                 }).then(results => {
-                    let endpoint = results[0]
-                    let user = results[1]
-                    let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
+                    endpoint = results[0]
 
-                    fitbitApiClient.get(endpoint, user.access_token).then(results => {
-                        if (results[1].statusCode === 200) {
-                            return [endpoint, results]
+                    return fitbitApiClient.get(endpoint, results[1].access_token)
 
-                        } else {
-                            let error = results[0].errors[0]
-                            next(new Error(`${error.errorType} (${error.message})`))
-                        }
+                }).then(results => {
+                    if (results[1].statusCode === 200) {
+                        return [endpoint, results]
 
-                    }).then(results => {
-                        res.render('api/index', {
-                            data: beautify(results[1], null, 2),
-                            endpoint: results[0]
-                        })
-                    }).catch(err => {
-                        next(err)
+                    } else {
+                        let error = results[0].errors[0]
+                        next(new Error(`${error.errorType} (${error.message})`))
+                    }
+
+                }).then(results => {
+                    res.render('api/index', {
+                        data: beautify(results[1], null, 2),
+                        endpoint: results[0]
                     })
-
-                }).catch(err => {
-                    next(err)
-                })
+                }, next)
             })
 
         } else {
