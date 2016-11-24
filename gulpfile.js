@@ -11,6 +11,8 @@ let logger = require('./lib/logger')
 let server
 let watchScripts = [
     '*.js',
+    'config/**/*.json',
+    'controllers/**/*.js',
     'db/**/*.js',
     'lib/**/*.js',
     'routes/**/*.js'

@@ -1,74 +1,8 @@
 'use strict'
 
-const Promise = require('bluebird')
 const router = require('express-promise-router')()
-const config = require('config')
-const FitbitApiClient = require('fitbit-node')
-const beautify = require('json-beautify')
-const models = require('../lib/models')
-const fitbitApiHelper = require('../lib/fitbit-api-helper')
-const i18n = require('../lib/i18n').configure()
+const api =  require('../controllers').api
 
-let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit.client_secret)
-
-function findUser(username) {
-    return new Promise((resolve, reject) => {
-        models.User.find({where: {username: username}}).then(user => {
-            resolve(user)
-        }).catch(err => {
-            reject(err)
-        })
-    })
-}
-
-function findData(endpoint, user) {
-    return new Promise((resolve, reject) => {
-        fitbitApiClient.get(endpoint, user.access_token).then(results => {
-            if (results[1].statusCode === 200) {
-                resolve([endpoint, results])
-
-            } else {
-                let error = results[0].errors[0]
-                reject(new Error(`${error.errorType} (${error.message})`))
-            }
-        })
-   })
-}
-
-router.get('/:username?', (req, res) => {
-    if (req.params.username) {
-        return Promise.try(() => {
-                return findUser(req.params.username)
-
-        }).then((user) => {
-            if (user) {
-                let endpoint = req.query.endpoint
-
-                if (!endpoint) {
-                    endpoint = fitbitApiHelper.heartrateEndpoint(user.timezone)
-                }
-
-                return findData(endpoint, user)
-            } else {
-                throw new Error('User does not exist.')
-            }
-
-        }).then(results => {
-            res.render('api/index', {
-                i18n: i18n,
-                data: beautify(results[1], null, 2),
-                endpoint: results[0]
-            })
-        })
-
-    } else {
-        let baseUrl = `${req.protocol}://${req.header('host')}/`
-
-        res.render('api/index', {
-            i18n: i18n,
-            baseUrl: baseUrl,
-        })
-    }
-})
+router.get('/:username?', api.index)
 
 module.exports = router

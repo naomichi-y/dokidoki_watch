@@ -37,36 +37,38 @@
         <div class="top-bar">
             <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
-                    <li class="menu-text"><a href="/"><%- @i18n.__('common.app_name') %></a></li>
+                    <li class="menu-text"><a href="/"><%- @__('common.app_name') %></a></li>
                 </ul>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <h1><%- @i18n.__('pages.index.title') %></h1>
-                <% if @endpoint?: %>
-                    <form>
-                        <div class="input-group">
-                            <span class="input-group-label">Endpoint</span>
-                            <input class="input-group-field" type="text" name="endpoint" value="<%- @endpoint %>" placeholder="/profile.json">
-                            <div class="input-group-button">
-                                <input type="submit" class="button" value="Execute">
+                <div class="medium-10 medium-offset-1 columns">
+                    <h1><%- @__('views.index.title') %></h1>
+                    <% if @endpoint?: %>
+                        <form>
+                            <div class="input-group">
+                                <span class="input-group-label"><%- @__('views.index.endpoint') %></span>
+                                <input class="input-group-field" type="text" name="endpoint" value="<%- @endpoint %>" placeholder="/profile.json">
+                                <div class="input-group-button">
+                                    <input type="submit" class="button" value="<%- @__('views.index.execute') %>">
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                    <pre><code class="json"><%- @data %></code></pre>
-                <% else: %>
-                    <ol>
-                        <li>
-                            <p><%- @i18n.__('pages.index.setup_flow1') %></p>
-                            <p><pre><code class="markdown"><a href="<%- @baseUrl %>users/new"><%- @baseUrl %>users/new</a></code></pre></p>
-                        </li>
-                        <li>
-                            <p><%- @i18n.__('pages.index.setup_flow2') %></p>
-                            <p><pre><code class="markdown"><%- @baseUrl %>api/{users#username}</code></pre></p>
-                        </li>
-                    </ol>
-                <% end %>
+                        </form>
+                        <pre><code class="json"><%- @data %></code></pre>
+                    <% else: %>
+                        <ol>
+                            <li>
+                                <p><%- @__('views.index.setup_flow1') %></p>
+                                <p><pre><code class="markdown"><a href="<%- @baseUrl %>users/new"><%- @baseUrl %>users/new</a></code></pre></p>
+                            </li>
+                            <li>
+                                <p><%- @__('views.index.setup_flow2') %></p>
+                                <p><pre><code class="markdown"><%- @baseUrl %>api/{users#username}</code></pre></p>
+                            </li>
+                        </ol>
+                    <% end %>
+                </div>
             </div>
         </div>
     </body>

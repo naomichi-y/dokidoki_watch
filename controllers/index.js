@@ -1,9 +1,9 @@
 'use strict'
 
-let routes = {
+let controllers = {
     api: require('./api'),
     receiver: require('./receiver'),
     users: require('./users')
 }
 
-module.exports = routes
+module.exports = controllers

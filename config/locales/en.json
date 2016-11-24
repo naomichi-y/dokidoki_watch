@@ -3,7 +3,7 @@
         "app_name": "dokidoki watch"
     },
     "messages": {
-        "threshold_over": "心拍数が%sこえてるよ。落ち着いて〜 (直近の平均BPM: %s)"
+        "threshold_over": "Heart rate is over %s. Calm down please (Latest BPM: %s)"
     },
     "views": {
         "index": {
