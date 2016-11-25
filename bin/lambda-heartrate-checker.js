@@ -15,7 +15,8 @@ exports.handler = (event, context, callback) => {
         process.env.NODE_ENV = 'development'
     }
 
-    worker.run().then(() => {
-        callback(null, 'Check is completed.')
-    })
+    worker.run()
+        .then(() => {
+            callback(null, 'Check is completed.')
+        })
 }

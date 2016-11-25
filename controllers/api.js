@@ -11,43 +11,44 @@ let fitbitApiClient = new FitbitApiClient(config.fitbit.client_id, config.fitbit
 let controller = {
     index: (req, res, next) => {
         if (req.params.username) {
+            let endpoint = req.query.endpoint
+
             Promise.try(() => {
-                let endpoint
-
-                models.User.find({where: {username: req.params.username}}).then(user => {
-                    if (user) {
-                        let endpoint = req.query.endpoint
-
-                        if (!endpoint) {
-                            endpoint = fitbitApiHelper.buildHeartrateEndpoint(user.timezone)
-                        }
-
-                        return [endpoint, user]
-
-                    } else {
-                        next(new Error('User does not exist.'))
+                return models.User.find({where: {username: req.params.username}})
+            })
+            .then(results => {
+                if (results) {
+                    if (!endpoint) {
+                        endpoint = fitbitApiHelper.buildHeartrateEndpoint(results.timezone)
                     }
 
-                }).then(results => {
-                    endpoint = results[0]
+                    return results
 
-                    return fitbitApiClient.get(endpoint, results[1].access_token)
+                } else {
+                    throw new Error('User does not exist.')
+                }
 
-                }).then(results => {
-                    if (results[1].statusCode === 200) {
-                        return [endpoint, results]
+            })
+            .then(results => {
+                return fitbitApiClient.get(endpoint, results.access_token)
+            })
+            .then(results => {
+                if (results[1].statusCode === 200) {
+                    return results
 
-                    } else {
-                        let error = results[0].errors[0]
-                        next(new Error(`${error.errorType} (${error.message})`))
-                    }
+                } else {
+                    throw new Error(`${results[1].statusMessage}`)
+                }
 
-                }).then(results => {
-                    res.render('api/index', {
-                        data: beautify(results[1], null, 2),
-                        endpoint: results[0]
-                    })
-                }, next)
+            })
+            .then(results => {
+                res.render('api/index', {
+                    data: beautify(results[1], null, 2),
+                    endpoint: endpoint
+                })
+            })
+            .catch(err => {
+                next(err)
             })
 
         } else {

@@ -4,6 +4,9 @@
         "cloud_formation_stack_name": "DokiDokiWatchStack",
         "region": "YOUR_AWS_REGION"
     },
+    "i18n": {
+        "default_locale": "ja"
+    },
     "heartrate": {
         "threshold": {
             "upper_limit": 110
