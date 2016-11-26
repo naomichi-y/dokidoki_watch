@@ -1,6 +1,7 @@
 'use strict'
 
-const router = require('express-promise-router')()
+const express = require('express')
+const router = express.Router()
 const api =  require('../controllers').api
 
 router.get('/:username?', api.index)

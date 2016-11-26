@@ -8,10 +8,8 @@ const awsServerlessExpressMiddleware = require('aws-serverless-express/middlewar
 const app = express()
 const ect = require('ect')
 const routes = require('./routes')
-const errorHandler = require('./lib/middleware/error-handler')
 const i18n = require('./lib/i18n').configure()
 
-//app.use(errorHandler())
 app.use(nofavicon())
 app.use(cors())
 app.use(bodyParser.json())

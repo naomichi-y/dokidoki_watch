@@ -125,7 +125,7 @@ gulp.task('delete-stack', () => {
 })
 
 gulp.task('package-function', () => {
-    logger.info(execSync(`zip -q -r tmp/lambda-function.zip .sequelizerc app.js bin/lambda-api-receiver.js bin/lambda-heartrate-checker.js config lib node_modules public routes views`).toString())
+    logger.info(execSync(`zip -q -r tmp/lambda-function.zip .sequelizerc app.js bin/lambda-api-receiver.js bin/lambda-heartrate-checker.js config controllers lib node_modules public routes views`).toString())
 })
 
 gulp.task('upload-function', () => {
