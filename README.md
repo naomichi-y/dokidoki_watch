@@ -8,7 +8,7 @@ Heart rate is analyzed using Fitbit API, and notification is sent to LINE talk r
 ## Architecture
 Applications are configured in a serverless architecture and work on AWS Lambda.
 
-<img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/architecture.png" width="600px">
+* [Slidesahre](http://www.slideshare.net/NaomichiYamakita/fitbit-69538939)
 
 ## Required tools
 
@@ -47,8 +47,6 @@ $ npm run sequelize db:migrate
 
 Open the [http://localhost:3000/](http://localhost:3000/) in your browser.
 In API console, you can try the Fitbit API.
-
-<img src="https://raw.githubusercontent.com/wiki/naomichi-y/dokidoki_watch/images/api_console.png" width="600px">
 
 If you want to start Express without going through Docker, please execute the following command.
 
