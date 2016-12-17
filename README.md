@@ -8,7 +8,7 @@ Heart rate is analyzed using Fitbit API, and notification is sent to LINE talk r
 ## Architecture
 Applications are configured in a serverless architecture and work on AWS Lambda.
 
-* [Slidesahre](http://www.slideshare.net/NaomichiYamakita/fitbit-69538939)
+* [Slideshare](http://www.slideshare.net/NaomichiYamakita/fitbit-69538939)
 
 ## Required tools
 
